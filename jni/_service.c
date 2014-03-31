@@ -7,6 +7,7 @@ int sockfd =0;
     size_t size;
     int out = 0;
     int i;
+    char q[5];
 int main()
 {
     if((sockfd=socket(AF_INET,SOCK_DGRAM,0))<0) {
@@ -29,10 +30,10 @@ int main()
   }
   fd = fopen("ip_table.txt","w");
   fclose(fd);
-  fprintf(stdout,"Waiting for client...\n");
+  fprintf(stdout,"khoi dong socket lang nghe port 5555\n");
   
   size = sizeof(clie_addr);
-  while(1) {     
+  while(!out) {     
     if(recvfrom(sockfd,msg_rec,sizeof(msg_rec),0,(struct sockaddr*)&clie_addr,&size)<0) {
       error("Khong nhan dc ban tin");
     }
@@ -75,6 +76,14 @@ int main()
       }
     }
   }
+    
+    fprintf(stdout,"nhan q de out\n");
+    fscanf(stdin,"%s",q);
+    if(strstr(q,"q")) {
+      fprintf(stdout,"Goob by");
+      out =1;
+      
+    }
   }
   fprintf(stdout,"Waiting done... Byebye !\n");
   write_file("ip_table.txt","anhduc\n");
